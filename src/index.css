@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Green & Mustard color palette - GoodBite Brand Colors */
+    --background: 180 11% 98%; /* #FAFBFB - putih terang */
+    --foreground: 152 41% 7%; /* #0B1A13 - abu-hitam */
+
+    --card: 0 0% 100%; /* putih penuh untuk card */
+    --card-foreground: 152 41% 7%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 152 41% 7%;
+
+    --primary: 152 47% 24%; /* #1F5B3B - hijau tua */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 180 11% 98%;
+    --secondary-foreground: 152 41% 7%;
+
+    --muted: 210 11% 96%;
+    --muted-foreground: 220 9% 46%; /* #6B7280 - abu-abu */
+
+    --accent: 45 96% 48%; /* #F2B705 - mustard */
+    --accent-foreground: 152 41% 7%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 152 47% 24%;
+
+    --radius: 0.5rem;
+    
+    /* Custom tokens */
+    --soft-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    --hover-lift: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 152 41% 7%;
+    --foreground: 0 0% 100%;
+
+    --card: 152 30% 12%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 152 30% 12%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 148 49% 35%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 152 20% 20%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 152 20% 20%;
+    --muted-foreground: 220 9% 70%;
+
+    --accent: 45 96% 48%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 152 20% 20%;
+    --input: 152 20% 20%;
+    --ring: 148 49% 35%;
+    
+    --sidebar-background: 30 25% 15%;
+    --sidebar-foreground: 35 100% 97%;
+    --sidebar-primary: 15 65% 60%;
+    --sidebar-primary-foreground: 35 100% 97%;
+    --sidebar-accent: 30 20% 25%;
+    --sidebar-accent-foreground: 35 100% 97%;
+    --sidebar-border: 30 20% 25%;
+    --sidebar-ring: 15 65% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}

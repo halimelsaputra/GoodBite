@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { User, LogOut, ShoppingBag, Wallet } from "lucide-react";
+import { OrderService } from "@/services/OrderService";
 
 interface UserData {
   name: string;
@@ -59,9 +60,15 @@ const Profil = () => {
   };
 
   const handleLogout = () => {
+    // Clear user session in OrderService
+    const orderService = OrderService.getInstance();
+    orderService.clearUserSession();
+    
+    // Remove user data from localStorage
     localStorage.removeItem("goodbite_user");
+    
     toast.success("Berhasil keluar");
-    navigate("/");
+    navigate("/", { replace: true });
   };
 
   if (!userData) {

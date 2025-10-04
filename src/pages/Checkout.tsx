@@ -33,14 +33,19 @@ const Checkout = () => {
   const pkg = packages.find(p => p.id === id);
 
   useEffect(() => {
-    // Load user data from localStorage
+    // Check authentication first
     const userData = localStorage.getItem("goodbite_user");
-    if (userData) {
-      const user = JSON.parse(userData);
-      setCustomerName(user.name || "");
-      setCustomerPhone(user.phone || "");
+    if (!userData) {
+      toast.error("Silakan login terlebih dahulu");
+      navigate("/login", { replace: true });
+      return;
     }
-  }, []);
+    
+    // Load user data from localStorage
+    const user = JSON.parse(userData);
+    setCustomerName(user.name || "");
+    setCustomerPhone(user.phone || "");
+  }, [navigate]);
 
   if (!pkg) {
     return (

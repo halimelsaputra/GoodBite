@@ -15,10 +15,30 @@ import { Order } from "@/models/Order";
 const Pesanan = () => {
   const [activeTab, setActiveTab] = useState("semua");
   const [timeLeft, setTimeLeft] = useState<{[key: string]: {hours: number, minutes: number}}>({});
+  const [orders, setOrders] = useState<Order[]>([]);
   const orderService = OrderService.getInstance();
   
-  const orders: Order[] = useMemo(() => {
-    return orderService.getAllOrders();
+  // Load orders on component mount and when returning to this page
+  useEffect(() => {
+    const loadOrders = () => {
+      orderService.refreshOrders(); // Refresh from localStorage
+      setOrders(orderService.getAllOrders());
+    };
+    
+    loadOrders();
+    
+    // Listen for storage changes from other tabs/windows
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === "goodbite_orders") {
+        loadOrders();
+      }
+    };
+    
+    window.addEventListener("storage", handleStorageChange);
+    
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, [orderService]);
 
   useEffect(() => {

@@ -17,6 +17,7 @@ const PesananDetail = () => {
   const navigate = useNavigate();
   const orderService = OrderService.getInstance();
   const [order, setOrder] = useState<Order | null>(() => {
+    orderService.refreshOrders(); // Refresh from localStorage first
     return orderService.getOrderById(id || "") || null;
   });
   const [showRating, setShowRating] = useState(false);

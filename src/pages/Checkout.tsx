@@ -12,20 +12,8 @@ import { Separator } from "@/components/ui/separator";
 import { MapPin, Clock, ArrowLeft, CheckCircle2, Wallet, CreditCard, Smartphone, User, Phone as PhoneIcon, ArrowRight } from "lucide-react";
 import { packages } from "@/data/packages";
 import { toast } from "sonner";
-
-interface Order {
-  id: string;
-  packageId: string;
-  storeName: string;
-  location: string;
-  price: number;
-  pickupTime: string;
-  orderTime: string;
-  status: "pending" | "picked" | "expired";
-  confirmationCode: string;
-  customerName: string;
-  customerPhone: string;
-}
+import { OrderService } from "@/services/OrderService";
+import { Order, OrderData } from "@/models/Order";
 
 type CheckoutStep = 1 | 2 | 3;
 
@@ -114,27 +102,22 @@ const Checkout = () => {
 
     // Simulate payment processing
     setTimeout(() => {
-      const orderId = Date.now().toString();
       const confirmationCode = generateConfirmationCode();
-      const newOrder: Order = {
-        id: orderId,
+      
+      // Use OrderService to create order
+      const orderService = OrderService.getInstance();
+      const orderData: OrderData = {
         packageId: pkg.id,
         storeName: pkg.storeName,
         location: pkg.location,
         price: pkg.price,
         pickupTime: pkg.pickupTime,
-        orderTime: new Date().toISOString(),
-        status: "pending",
         confirmationCode,
         customerName,
         customerPhone
       };
-
-      // Save to localStorage
-      const existingOrders = localStorage.getItem("goodbite_orders");
-      const orders = existingOrders ? JSON.parse(existingOrders) : [];
-      orders.push(newOrder);
-      localStorage.setItem("goodbite_orders", JSON.stringify(orders));
+      
+      const newOrder = orderService.createOrder(orderData);
 
       setConfirmedOrder(newOrder);
       setOrderConfirmed(true);

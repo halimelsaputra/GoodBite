@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  goodbite-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    container_name: goodbite-frontend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - goodbite-network
+
+  # Optional: Nginx reverse proxy (jika butuh custom domain)
+  # nginx-proxy:
+  #   image: nginx:alpine
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./proxy.conf:/etc/nginx/nginx.conf
+  #   depends_on:
+  #     - goodbite-app
+  #   networks:
+  #     - goodbite-network
+
+networks:
+  goodbite-network:
+    driver: bridge
+
+volumes:
+  goodbite-data:

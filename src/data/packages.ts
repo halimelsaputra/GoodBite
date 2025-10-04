@@ -4,10 +4,10 @@ import kopiKananganImage from "@/img/Kopi-kenangan.jpg";
 import pizzaHutImage from "@/img/Pizza-hut.jpg";
 import jcoImage from "@/img/J.co.jpg";
 import kfcImage from "@/img/KfC.jpg";
-import rotiO from "@/img/Roti-O.jpg";
-import chatime from "@/img/Chatime.jpg";
-import hokben from "@/img/Hokben.jpg";
-import geprek from "@/img/Geprek-bensu.jpg";
+import rotiO from "@/img/roti-o.jpg";
+import chatime from "@/img/chatime.jpg";
+import hokben from "@/img/hokben.jpg";
+import geprek from "@/img/Geprek-Bensu.jpg";
 export interface Package {
   id: string;
   storeName: string;

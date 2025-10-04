@@ -3,14 +3,17 @@ import { Order, OrderData, OrderJSON } from "@/models/Order";
 /**
  * OrderService - OOP Service Class (Singleton Pattern)
  * Handles all order-related business logic and data persistence
+ * Orders are stored per user to maintain session isolation
  */
 export class OrderService {
   private static instance: OrderService;
   private orders: Order[] = [];
-  private readonly STORAGE_KEY = "goodbite_orders";
+  private readonly STORAGE_KEY_PREFIX = "goodbite_orders_";
+  private currentUserPhone: string = "";
 
   // Private constructor for Singleton pattern
   private constructor() {
+    this.setCurrentUser();
     this.loadOrders();
   }
 
@@ -23,14 +26,44 @@ export class OrderService {
   }
 
   /**
-   * Load orders from localStorage
+   * Set current user from localStorage
+   */
+  private setCurrentUser(): void {
+    try {
+      const userData = localStorage.getItem("goodbite_user");
+      if (userData) {
+        const user = JSON.parse(userData);
+        this.currentUserPhone = user.phone || "";
+      }
+    } catch (error) {
+      console.error("Error loading user data:", error);
+      this.currentUserPhone = "";
+    }
+  }
+
+  /**
+   * Get storage key for current user
+   */
+  private getStorageKey(): string {
+    return this.STORAGE_KEY_PREFIX + this.currentUserPhone;
+  }
+
+  /**
+   * Load orders from localStorage for current user
    */
   private loadOrders(): void {
     try {
-      const stored = localStorage.getItem(this.STORAGE_KEY);
+      if (!this.currentUserPhone) {
+        this.orders = [];
+        return;
+      }
+      
+      const stored = localStorage.getItem(this.getStorageKey());
       if (stored) {
         const ordersJSON: OrderJSON[] = JSON.parse(stored);
         this.orders = ordersJSON.map(json => Order.fromJSON(json));
+      } else {
+        this.orders = [];
       }
     } catch (error) {
       console.error("Error loading orders:", error);
@@ -39,15 +72,38 @@ export class OrderService {
   }
 
   /**
-   * Save orders to localStorage
+   * Save orders to localStorage for current user
    */
   private saveOrders(): void {
     try {
+      if (!this.currentUserPhone) {
+        console.error("No user logged in, cannot save orders");
+        return;
+      }
+      
       const ordersJSON = this.orders.map(order => order.toJSON());
-      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(ordersJSON));
+      localStorage.setItem(this.getStorageKey(), JSON.stringify(ordersJSON));
     } catch (error) {
       console.error("Error saving orders:", error);
     }
+  }
+
+  /**
+   * Switch to a different user and load their orders
+   * Call this when user logs in or switches account
+   */
+  public switchUser(userPhone: string): void {
+    this.currentUserPhone = userPhone;
+    this.loadOrders();
+  }
+
+  /**
+   * Clear current user session
+   * Call this when user logs out
+   */
+  public clearUserSession(): void {
+    this.currentUserPhone = "";
+    this.orders = [];
   }
 
   /**
@@ -168,7 +224,9 @@ export class OrderService {
    */
   public clearAllOrders(): void {
     this.orders = [];
-    localStorage.removeItem(this.STORAGE_KEY);
+    if (this.currentUserPhone) {
+      localStorage.removeItem(this.getStorageKey());
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { QRCodeSVG } from "qrcode.react";
 import Header from "@/components/Header";
@@ -13,10 +13,31 @@ import { OrderService } from "@/services/OrderService";
 import { Order } from "@/models/Order";
 
 const Pesanan = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("semua");
   const [timeLeft, setTimeLeft] = useState<{[key: string]: {hours: number, minutes: number}}>({});
   const [orders, setOrders] = useState<Order[]>([]);
   const orderService = OrderService.getInstance();
+  
+  // Check authentication
+  useEffect(() => {
+    const userData = localStorage.getItem("goodbite_user");
+    if (!userData) {
+      navigate("/login", { replace: true });
+      return;
+    }
+    
+    // Switch to current user's orders
+    try {
+      const user = JSON.parse(userData);
+      if (user.phone) {
+        orderService.switchUser(user.phone);
+      }
+    } catch (error) {
+      console.error("Error parsing user data:", error);
+      navigate("/login", { replace: true });
+    }
+  }, [navigate, orderService]);
   
   // Load orders on component mount and when returning to this page
   useEffect(() => {
@@ -29,7 +50,7 @@ const Pesanan = () => {
     
     // Listen for storage changes from other tabs/windows
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === "goodbite_orders") {
+      if (e.key && e.key.startsWith("goodbite_orders_")) {
         loadOrders();
       }
     };

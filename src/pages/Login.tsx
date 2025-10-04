@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
+import { OrderService } from "@/services/OrderService";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,6 +29,11 @@ const Login = () => {
     };
 
     localStorage.setItem("goodbite_user", JSON.stringify(user));
+    
+    // Switch OrderService to this user's orders
+    const orderService = OrderService.getInstance();
+    orderService.switchUser(phone);
+    
     toast.success("Berhasil masuk!");
     navigate("/jelajahi");
   };

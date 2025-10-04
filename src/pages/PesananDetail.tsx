@@ -16,13 +16,42 @@ const PesananDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const orderService = OrderService.getInstance();
-  const [order, setOrder] = useState<Order | null>(() => {
-    orderService.refreshOrders(); // Refresh from localStorage first
-    return orderService.getOrderById(id || "") || null;
-  });
+  
+  // Check authentication first and switch to user's orders
+  useEffect(() => {
+    const userData = localStorage.getItem("goodbite_user");
+    if (!userData) {
+      navigate("/login", { replace: true });
+      return;
+    }
+    
+    // Switch to current user's orders
+    try {
+      const user = JSON.parse(userData);
+      if (user.phone) {
+        orderService.switchUser(user.phone);
+        orderService.refreshOrders();
+      }
+    } catch (error) {
+      console.error("Error parsing user data:", error);
+      navigate("/login", { replace: true });
+    }
+  }, [navigate, orderService]);
+  
+  const [order, setOrder] = useState<Order | null>(null);
   const [showRating, setShowRating] = useState(false);
   const [rating, setRating] = useState(0);
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0 });
+
+  // Load order after user is set
+  useEffect(() => {
+    const loadOrder = () => {
+      const foundOrder = orderService.getOrderById(id || "");
+      setOrder(foundOrder || null);
+    };
+    
+    loadOrder();
+  }, [id, orderService]);
 
   useEffect(() => {
     if (!order || !order.isPending()) return;

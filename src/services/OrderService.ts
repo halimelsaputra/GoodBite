@@ -75,6 +75,14 @@ export class OrderService {
   }
 
   /**
+   * Refresh orders from localStorage
+   * Useful when orders might have been updated externally
+   */
+  public refreshOrders(): void {
+    this.loadOrders();
+  }
+
+  /**
    * Get orders by status
    */
   public getOrdersByStatus(status: "pending" | "picked" | "expired"): Order[] {

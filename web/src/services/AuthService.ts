@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:7860/api';
 
 // Safely parse JSON responses (handles HTML/error bodies gracefully)
 const parseResponse = async (response: Response) => {

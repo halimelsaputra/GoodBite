@@ -1,19 +1,19 @@
-FROM node:18-alpine as builder
+FROM python:3.11-slim
+
+ENV PORT=7860
+ENV DATA_DIR=/data
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
+RUN mkdir -p /data
 
-COPY package*.json ./
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN npm ci
+COPY api.py .
+COPY data ./data
 
-COPY . .
+EXPOSE 7860
 
-RUN npm run build
-
-FROM nginx:alpine
-
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "7860"]

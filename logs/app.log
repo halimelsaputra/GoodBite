@@ -5,3 +5,61 @@
 {"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-20 23:42:32","url":"/api/sellers/p9q6nyvar/packages"}
 {"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-20 23:42:32","url":"/api/sellers/5v93fpy2p/packages"}
 {"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-20 23:42:32","url":"/api/sellers/7genwoswn/packages"}
+{"level":"info","message":"GoodBite Server running on http://localhost:5000","timestamp":"2025-12-21 00:03:39"}
+{"level":"info","message":"Data files stored in: C:\\Kuliah\\Semester 5\\PRAK\\Prak POPL\\GoodBite\\data","timestamp":"2025-12-21 00:03:39"}
+{"durationMs":6,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:47","url":"/api/sellers"}
+{"durationMs":4,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:47","url":"/api/sellers/6taop3cus/packages"}
+{"durationMs":2,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:47","url":"/api/sellers/p9q6nyvar/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:47","url":"/api/sellers/5v93fpy2p/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:47","url":"/api/sellers/7genwoswn/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:50","url":"/api/sellers"}
+{"durationMs":2,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:50","url":"/api/sellers/6taop3cus/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:50","url":"/api/sellers/p9q6nyvar/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:50","url":"/api/sellers/5v93fpy2p/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:50","url":"/api/sellers/7genwoswn/packages"}
+{"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:53","url":"/api/sellers"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:53","url":"/api/sellers/6taop3cus/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:53","url":"/api/sellers/p9q6nyvar/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:53","url":"/api/sellers/5v93fpy2p/packages"}
+{"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:03:53","url":"/api/sellers/7genwoswn/packages"}
+{"level":"info","message":"GoodBite Server running on http://localhost:7860","timestamp":"2025-12-21 00:29:20"}
+{"level":"info","message":"Data files stored in: C:\\Kuliah\\Semester 5\\PRAK\\Prak POPL\\GoodBite\\data","timestamp":"2025-12-21 00:29:20"}
+{"level":"info","message":"GoodBite Server running on http://localhost:7860","timestamp":"2025-12-21 00:35:06"}
+{"level":"info","message":"Data files stored in: C:\\Kuliah\\Semester 5\\PRAK\\Prak POPL\\GoodBite\\data","timestamp":"2025-12-21 00:35:06"}
+{"durationMs":5,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":200,"timestamp":"2025-12-21 00:35:12","url":"/api/sellers"}
+{"durationMs":3,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":200,"timestamp":"2025-12-21 00:35:12","url":"/api/sellers/6taop3cus/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":200,"timestamp":"2025-12-21 00:35:12","url":"/api/sellers/p9q6nyvar/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":200,"timestamp":"2025-12-21 00:35:12","url":"/api/sellers/5v93fpy2p/packages"}
+{"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":200,"timestamp":"2025-12-21 00:35:12","url":"/api/sellers/7genwoswn/packages"}
+{"level":"info","message":"Customer login success","timestamp":"2025-12-21 00:35:21","userId":"rwa0qiagh","username":"milan"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"POST","status":200,"timestamp":"2025-12-21 00:35:21","url":"/api/customers/login"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:21","url":"/api/sellers"}
+{"durationMs":4,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:21","url":"/api/sellers/6taop3cus/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:21","url":"/api/sellers/p9q6nyvar/packages"}
+{"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:21","url":"/api/sellers/5v93fpy2p/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:21","url":"/api/sellers/7genwoswn/packages"}
+{"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:23","url":"/api/sellers"}
+{"durationMs":2,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:23","url":"/api/sellers/6taop3cus/packages"}
+{"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:23","url":"/api/sellers/p9q6nyvar/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:23","url":"/api/sellers/5v93fpy2p/packages"}
+{"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:23","url":"/api/sellers/7genwoswn/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:25","url":"/api/sellers"}
+{"durationMs":2,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:25","url":"/api/sellers/6taop3cus/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:25","url":"/api/sellers/p9q6nyvar/packages"}
+{"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:25","url":"/api/sellers/5v93fpy2p/packages"}
+{"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 00:35:25","url":"/api/sellers/7genwoswn/packages"}
+{"durationMs":6,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:23","url":"/api/sellers"}
+{"durationMs":8,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:23","url":"/api/sellers/6taop3cus/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:23","url":"/api/sellers/p9q6nyvar/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:23","url":"/api/sellers/5v93fpy2p/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:23","url":"/api/sellers/7genwoswn/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:26","url":"/api/sellers"}
+{"durationMs":2,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:26","url":"/api/sellers/6taop3cus/packages"}
+{"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:26","url":"/api/sellers/p9q6nyvar/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:26","url":"/api/sellers/5v93fpy2p/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:26","url":"/api/sellers/7genwoswn/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:28","url":"/api/sellers"}
+{"durationMs":2,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:28","url":"/api/sellers/6taop3cus/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:28","url":"/api/sellers/p9q6nyvar/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:28","url":"/api/sellers/5v93fpy2p/packages"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-21 01:17:28","url":"/api/sellers/7genwoswn/packages"}

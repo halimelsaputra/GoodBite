@@ -1,0 +1,38 @@
+[
+  {
+    "id": "6taop3cus",
+    "username": "milan",
+    "storeName": "Pointer Coffe",
+    "email": "milan@gmail.com",
+    "phone": "08115365722",
+    "password": "123456",
+    "createdAt": "2025-12-15T12:13:38.595Z"
+  },
+  {
+    "id": "p9q6nyvar",
+    "username": "halim",
+    "storeName": "SOBA",
+    "email": "Halim@gmail.com",
+    "phone": "085212133892",
+    "password": "123456",
+    "createdAt": "2025-12-17T05:53:29.044Z"
+  },
+  {
+    "id": "5v93fpy2p",
+    "username": "dika",
+    "storeName": "Aceh Food",
+    "email": "dika@gmail.com",
+    "phone": "08675439282",
+    "password": "123456",
+    "createdAt": "2025-12-17T05:58:44.888Z"
+  },
+  {
+    "id": "7genwoswn",
+    "username": "alol",
+    "storeName": "Alim Food",
+    "email": "Alol@gmail.com",
+    "phone": "08764872945",
+    "password": "123456",
+    "createdAt": "2025-12-17T06:57:31.334Z"
+  }
+]

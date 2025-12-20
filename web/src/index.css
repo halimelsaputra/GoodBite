@@ -1,0 +1,355 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Green & Mustard color palette - GoodBite Brand Colors */
+    --background: 180 11% 98%; /* #FAFBFB - putih terang */
+    --foreground: 152 41% 7%; /* #0B1A13 - abu-hitam */
+
+    --card: 0 0% 100%; /* putih penuh untuk card */
+    --card-foreground: 152 41% 7%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 152 41% 7%;
+
+    --primary: 152 47% 24%; /* #1F5B3B - hijau tua */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 180 11% 98%;
+    --secondary-foreground: 152 41% 7%;
+
+    --muted: 210 11% 96%;
+    --muted-foreground: 220 9% 46%; /* #6B7280 - abu-abu */
+
+    --accent: 45 96% 48%; /* #F2B705 - mustard */
+    --accent-foreground: 152 41% 7%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 152 47% 24%;
+
+    --radius: 0.5rem;
+    
+    /* Custom tokens */
+    --soft-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    --hover-lift: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Neutral palette for ripple grid */
+    --color-neutral-100: hsl(0 0% 96%);
+    --color-neutral-300: hsl(0 0% 78%);
+    --color-neutral-500: hsl(0 0% 55%);
+  }
+
+  .dark {
+    --background: 152 41% 7%;
+    --foreground: 0 0% 100%;
+
+    --card: 152 30% 12%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 152 30% 12%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 148 49% 35%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 152 20% 20%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 152 20% 20%;
+    --muted-foreground: 220 9% 70%;
+
+    --accent: 45 96% 48%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 152 20% 20%;
+    --input: 152 20% 20%;
+    --ring: 148 49% 35%;
+    
+    --sidebar-background: 30 25% 15%;
+    --sidebar-foreground: 35 100% 97%;
+    --sidebar-primary: 15 65% 60%;
+    --sidebar-primary-foreground: 35 100% 97%;
+    --sidebar-accent: 30 20% 25%;
+    --sidebar-accent-foreground: 35 100% 97%;
+    --sidebar-border: 30 20% 25%;
+    --sidebar-ring: 15 65% 60%;
+
+    --color-neutral-700: hsl(0 0% 30%);
+    --color-neutral-800: hsl(0 0% 18%);
+    --color-neutral-900: hsl(0 0% 10%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html, body {
+    @apply bg-background text-foreground font-body;
+    scrollbar-width: none; /* Firefox: hide scrollbar */
+    overscroll-behavior: none;
+  }
+
+  /* Hide scrollbar while keeping scroll functionality */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+/* Hero word animation */
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(20px);
+  animation: heroWord 0.8s ease forwards;
+  margin-right: 6px;
+}
+
+.hero-fade {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(20px);
+  animation: heroWord 0.8s ease forwards;
+}
+
+/* Drop-in animation for hero images */
+.hero-drop {
+  opacity: 0;
+  transform: translateY(-40px);
+  animation: heroDrop 0.9s ease-out forwards;
+}
+
+@keyframes heroDrop {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Infinite moving cards animation */
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) linear infinite;
+  animation-direction: var(--animation-direction, forwards);
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes heroWord {
+  to {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+/* Ripple grid animation */
+.animate-cell-ripple {
+  animation: cellRipple var(--duration, 800ms) ease forwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes cellRipple {
+  0% {
+    opacity: 0.35;
+    transform: scale(0.9);
+    filter: brightness(1);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.08);
+    filter: brightness(1.8);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.25);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+    filter: brightness(1.2);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* Hover card (from card-hero_section) */
+.hover-card {
+  position: absolute;
+  width: 190px;
+  height: 254px;
+  transition: 200ms;
+  pointer-events: auto;
+  transform-style: preserve-3d;
+  z-index: 50;
+}
+
+.hover-card:active {
+  width: 180px;
+  height: 245px;
+}
+
+.hover-card .card-canvas {
+  perspective: 800px;
+  inset: 0;
+  z-index: 200;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  pointer-events: auto;
+}
+
+.hover-card .card-track {
+  position: relative;
+  z-index: 200;
+  width: 100%;
+  height: 100%;
+}
+
+.hover-card .card-track.tr-1 { grid-area: 1 / 1 / 2 / 2; }
+.hover-card .card-track.tr-2 { grid-area: 1 / 2 / 2 / 3; }
+.hover-card .card-track.tr-3 { grid-area: 1 / 3 / 2 / 4; }
+.hover-card .card-track.tr-4 { grid-area: 1 / 4 / 2 / 5; }
+.hover-card .card-track.tr-5 { grid-area: 1 / 5 / 2 / 6; }
+.hover-card .card-track.tr-6 { grid-area: 2 / 1 / 3 / 2; }
+.hover-card .card-track.tr-7 { grid-area: 2 / 2 / 3 / 3; }
+.hover-card .card-track.tr-8 { grid-area: 2 / 3 / 3 / 4; }
+.hover-card .card-track.tr-9 { grid-area: 2 / 4 / 3 / 5; }
+.hover-card .card-track.tr-10 { grid-area: 2 / 5 / 3 / 6; }
+.hover-card .card-track.tr-11 { grid-area: 3 / 1 / 4 / 2; }
+.hover-card .card-track.tr-12 { grid-area: 3 / 2 / 4 / 3; }
+.hover-card .card-track.tr-13 { grid-area: 3 / 3 / 4 / 4; }
+.hover-card .card-track.tr-14 { grid-area: 3 / 4 / 4 / 5; }
+.hover-card .card-track.tr-15 { grid-area: 3 / 5 / 4 / 6; }
+.hover-card .card-track.tr-16 { grid-area: 4 / 1 / 5 / 2; }
+.hover-card .card-track.tr-17 { grid-area: 4 / 2 / 5 / 3; }
+.hover-card .card-track.tr-18 { grid-area: 4 / 3 / 5 / 4; }
+.hover-card .card-track.tr-19 { grid-area: 4 / 4 / 5 / 5; }
+.hover-card .card-track.tr-20 { grid-area: 4 / 5 / 5 / 6; }
+.hover-card .card-track.tr-21 { grid-area: 5 / 1 / 6 / 2; }
+.hover-card .card-track.tr-22 { grid-area: 5 / 2 / 6 / 3; }
+.hover-card .card-track.tr-23 { grid-area: 5 / 3 / 6 / 4; }
+.hover-card .card-track.tr-24 { grid-area: 5 / 4 / 6 / 5; }
+.hover-card .card-track.tr-25 { grid-area: 5 / 5 / 6 / 6; }
+
+.hover-card .card-track:hover {
+  cursor: pointer;
+}
+
+.hover-card .hover-card-body {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  transition: 700ms;
+  background: #ffffff;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  transform: var(--card-base-transform, translateZ(0));
+  transform-style: preserve-3d;
+  overflow: hidden;
+}
+
+.hover-card .hover-card-body::before {
+  content: '';
+  background: linear-gradient(43deg, rgb(65, 88, 208) 0%, rgb(200, 80, 192) 46%, rgb(255, 204, 112) 100%);
+  filter: blur(2rem);
+  opacity: 30%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  transition: 200ms;
+}
+
+.hover-card .hover-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hover-card .hover-card-body:hover {
+  transition: 300ms;
+  filter: brightness(1.1);
+}
+
+.hover-card .card-track.tr-1:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(20deg) rotateY(-10deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-2:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(20deg) rotateY(-5deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-3:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(20deg) rotateY(0deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-4:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(20deg) rotateY(5deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-5:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(20deg) rotateY(10deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-6:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(10deg) rotateY(-10deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-7:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(10deg) rotateY(-5deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-8:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(10deg) rotateY(0deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-9:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(10deg) rotateY(5deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-10:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(10deg) rotateY(10deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-11:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(0deg) rotateY(-10deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-12:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(0deg) rotateY(-5deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-13:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(0deg) rotateY(0deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-14:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(0deg) rotateY(5deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-15:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(0deg) rotateY(10deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-16:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(-10deg) rotateY(-10deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-17:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(-10deg) rotateY(-5deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-18:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(-10deg) rotateY(0deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-19:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(-10deg) rotateY(5deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-20:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(-10deg) rotateY(10deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-21:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(-20deg) rotateY(-10deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-22:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(-20deg) rotateY(-5deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-23:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(-20deg) rotateY(0deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-24:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(-20deg) rotateY(5deg) rotateZ(0deg); transition: 125ms ease-in-out; }
+.hover-card .card-track.tr-25:hover ~ .hover-card-body { transform: var(--card-base-transform, translateZ(0)) rotateX(-20deg) rotateY(10deg) rotateZ(0deg); transition: 125ms ease-in-out; }

@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
+import logger from './logger.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,6 +17,19 @@ app.use(cors());
 // (set generously to avoid 413 errors even for base64 previews)
 app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ extended: true, limit: '25mb' }));
+app.use((req, res, next) => {
+  const startTime = Date.now();
+  res.on('finish', () => {
+    logger.info('HTTP request', {
+      method: req.method,
+      url: req.originalUrl,
+      status: res.statusCode,
+      durationMs: Date.now() - startTime,
+      ip: req.ip,
+    });
+  });
+  next();
+});
 
 // Data files paths
 const usersFile = path.join(__dirname, 'data', 'users.json');
@@ -41,7 +55,7 @@ const readUsersFile = () => {
     }
     return [];
   } catch (error) {
-    console.error('Error reading users file:', error);
+    logger.error('Error reading users file', { message: error.message });
     return [];
   }
 };
@@ -50,7 +64,7 @@ const writeUsersFile = (data) => {
   try {
     fs.writeFileSync(usersFile, JSON.stringify(data, null, 2), 'utf8');
   } catch (error) {
-    console.error('Error writing users file:', error);
+    logger.error('Error writing users file', { message: error.message });
   }
 };
 
@@ -62,7 +76,7 @@ const readSellersFile = () => {
     }
     return [];
   } catch (error) {
-    console.error('Error reading sellers file:', error);
+    logger.error('Error reading sellers file', { message: error.message });
     return [];
   }
 };
@@ -71,7 +85,7 @@ const writeSellersFile = (data) => {
   try {
     fs.writeFileSync(sellersFile, JSON.stringify(data, null, 2), 'utf8');
   } catch (error) {
-    console.error('Error writing sellers file:', error);
+    logger.error('Error writing sellers file', { message: error.message });
   }
 };
 
@@ -84,7 +98,7 @@ const readPackagesFile = (sellerId) => {
     }
     return [];
   } catch (error) {
-    console.error('Error reading packages file:', error);
+    logger.error('Error reading packages file', { message: error.message, sellerId });
     return [];
   }
 };
@@ -94,7 +108,7 @@ const writePackagesFile = (sellerId, data) => {
     const packageFile = path.join(packagesDir, `${sellerId}.json`);
     fs.writeFileSync(packageFile, JSON.stringify(data, null, 2), 'utf8');
   } catch (error) {
-    console.error('Error writing packages file:', error);
+    logger.error('Error writing packages file', { message: error.message, sellerId });
   }
 };
 
@@ -106,7 +120,7 @@ const readReviewsFile = () => {
     }
     return [];
   } catch (error) {
-    console.error('Error reading reviews file:', error);
+    logger.error('Error reading reviews file', { message: error.message });
     return [];
   }
 };
@@ -123,7 +137,7 @@ const findSellerIdByPackageId = (packageId) => {
       }
     }
   } catch (error) {
-    console.error('Error finding sellerId by packageId:', error);
+    logger.error('Error finding sellerId by packageId', { message: error.message, packageId });
   }
   return null;
 };
@@ -132,7 +146,7 @@ const writeReviewsFile = (data) => {
   try {
     fs.writeFileSync(reviewsFile, JSON.stringify(data, null, 2), 'utf8');
   } catch (error) {
-    console.error('Error writing reviews file:', error);
+    logger.error('Error writing reviews file', { message: error.message });
   }
 };
 
@@ -145,10 +159,12 @@ app.post('/api/customers/register', (req, res) => {
 
     // Validation
     if (!username || !name || !email || !phone || !password) {
+      logger.warn('Customer register validation failed', { username, email });
       return res.status(400).json({ error: 'Semua field wajib diisi' });
     }
 
     if (password !== confirmPassword) {
+      logger.warn('Customer register password mismatch', { username, email });
       return res.status(400).json({ error: 'Password tidak cocok' });
     }
 
@@ -156,10 +172,12 @@ app.post('/api/customers/register', (req, res) => {
 
     // Check if user already exists
     if (users.find(u => u.username === username)) {
+      logger.warn('Customer register username already used', { username });
       return res.status(400).json({ error: 'Username sudah digunakan' });
     }
 
     if (users.find(u => u.email === email)) {
+      logger.warn('Customer register email already used', { email });
       return res.status(400).json({ error: 'Email sudah terdaftar' });
     }
 
@@ -176,6 +194,7 @@ app.post('/api/customers/register', (req, res) => {
 
     users.push(newUser);
     writeUsersFile(users);
+    logger.info('Customer registered', { userId: newUser.id, username });
 
     res.json({ 
       success: true, 
@@ -187,6 +206,7 @@ app.post('/api/customers/register', (req, res) => {
       }
     });
   } catch (error) {
+    logger.error('Customer register failed', { message: error.message });
     res.status(500).json({ error: 'Server error: ' + error.message });
   }
 });
@@ -200,13 +220,16 @@ app.post('/api/customers/login', (req, res) => {
     const user = users.find(u => u.username === username);
 
     if (!user) {
+      logger.warn('Customer login username not found', { username });
       return res.status(401).json({ error: 'Username tidak ditemukan' });
     }
 
     if (user.password !== password) {
+      logger.warn('Customer login wrong password', { username });
       return res.status(401).json({ error: 'Password salah' });
     }
 
+    logger.info('Customer login success', { userId: user.id, username });
     res.json({
       success: true,
       user: {
@@ -217,6 +240,7 @@ app.post('/api/customers/login', (req, res) => {
       }
     });
   } catch (error) {
+    logger.error('Customer login failed', { message: error.message });
     res.status(500).json({ error: 'Server error: ' + error.message });
   }
 });
@@ -230,10 +254,12 @@ app.post('/api/sellers/register', (req, res) => {
 
     // Validation
     if (!username || !storeName || !email || !phone || !password) {
+      logger.warn('Seller register validation failed', { username, email });
       return res.status(400).json({ error: 'Semua field wajib diisi' });
     }
 
     if (password !== confirmPassword) {
+      logger.warn('Seller register password mismatch', { username, email });
       return res.status(400).json({ error: 'Password tidak cocok' });
     }
 
@@ -241,10 +267,12 @@ app.post('/api/sellers/register', (req, res) => {
 
     // Check if seller already exists
     if (sellers.find(s => s.username === username)) {
+      logger.warn('Seller register username already used', { username });
       return res.status(400).json({ error: 'Username sudah digunakan' });
     }
 
     if (sellers.find(s => s.email === email)) {
+      logger.warn('Seller register email already used', { email });
       return res.status(400).json({ error: 'Email sudah terdaftar' });
     }
 
@@ -279,6 +307,7 @@ app.post('/api/sellers/register', (req, res) => {
     };
 
     writePackagesFile(newSeller.id, [defaultPackage]);
+    logger.info('Seller registered', { sellerId: newSeller.id, username, storeName });
 
     res.json({
       success: true,
@@ -292,6 +321,7 @@ app.post('/api/sellers/register', (req, res) => {
       }
     });
   } catch (error) {
+    logger.error('Seller register failed', { message: error.message });
     res.status(500).json({ error: 'Server error: ' + error.message });
   }
 });
@@ -305,13 +335,16 @@ app.post('/api/sellers/login', (req, res) => {
     const seller = sellers.find(s => s.username === username);
 
     if (!seller) {
+      logger.warn('Seller login username not found', { username });
       return res.status(401).json({ error: 'Username tidak ditemukan' });
     }
 
     if (seller.password !== password) {
+      logger.warn('Seller login wrong password', { username });
       return res.status(401).json({ error: 'Password salah' });
     }
 
+    logger.info('Seller login success', { sellerId: seller.id, username });
     res.json({
       success: true,
       seller: {
@@ -324,6 +357,7 @@ app.post('/api/sellers/login', (req, res) => {
       }
     });
   } catch (error) {
+    logger.error('Seller login failed', { message: error.message });
     res.status(500).json({ error: 'Server error: ' + error.message });
   }
 });
@@ -348,14 +382,23 @@ app.put('/api/sellers/:sellerId/packages/:packageId', (req, res) => {
     const index = packages.findIndex(p => p.id === packageId);
 
     if (index === -1) {
+      logger.warn('Package not found', { sellerId, packageId });
       return res.status(404).json({ error: 'Package tidak ditemukan' });
     }
 
     packages[index] = { ...packages[index], ...packageData };
     writePackagesFile(sellerId, packages);
+    logger.info('Package updated', {
+      sellerId,
+      packageId,
+      price: packages[index].price,
+      originalValue: packages[index].originalValue,
+      available: packages[index].available,
+    });
 
     res.json({ success: true, package: packages[index] });
   } catch (error) {
+    logger.error('Update package failed', { message: error.message, sellerId: req.params.sellerId });
     res.status(500).json({ error: 'Server error: ' + error.message });
   }
 });
@@ -378,11 +421,13 @@ app.post('/api/packages/:packageId/reviews', (req, res) => {
     const { name, rating, comment, sellerId: sellerIdBody } = req.body;
 
     if (!name || !rating || !comment) {
+      logger.warn('Review validation failed', { packageId, name });
       return res.status(400).json({ error: 'name, rating, dan comment wajib diisi' });
     }
 
     const numericRating = Number(rating);
     if (Number.isNaN(numericRating) || numericRating < 1 || numericRating > 5) {
+      logger.warn('Review rating invalid', { packageId, rating: numericRating });
       return res.status(400).json({ error: 'rating harus 1-5' });
     }
 
@@ -402,9 +447,11 @@ app.post('/api/packages/:packageId/reviews', (req, res) => {
 
     reviews.push(newReview);
     writeReviewsFile(reviews);
+    logger.info('Review created', { reviewId: newReview.id, packageId, sellerId: newReview.sellerId });
 
     res.json({ success: true, review: newReview });
   } catch (error) {
+    logger.error('Create review failed', { message: error.message, packageId: req.params.packageId });
     res.status(500).json({ error: 'Server error: ' + error.message });
   }
 });
@@ -480,8 +527,18 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
+app.use((err, req, res, next) => {
+  logger.error('Unhandled error', {
+    message: err.message,
+    stack: err.stack,
+    method: req.method,
+    url: req.originalUrl,
+  });
+  res.status(500).json({ error: 'Server error' });
+});
+
 // Start server
 app.listen(PORT, () => {
-  console.log(`GoodBite Server running on http://localhost:${PORT}`);
-  console.log(`Data files stored in: ${path.join(__dirname, 'data')}`);
+  logger.info(`GoodBite Server running on http://localhost:${PORT}`);
+  logger.info(`Data files stored in: ${path.join(__dirname, 'data')}`);
 });

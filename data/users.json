@@ -16,5 +16,23 @@
     "phone": "0866554433778",
     "password": "123456",
     "createdAt": "2025-12-17T05:51:04.677Z"
+  },
+  {
+    "id": "8zq9biy8r",
+    "username": "faris",
+    "name": "faris ferdi",
+    "email": "faris@gmail.com",
+    "phone": "085212133899",
+    "password": "123456",
+    "createdAt": "2025-12-20T16:35:10.193Z"
+  },
+  {
+    "id": "60vw7xv2u",
+    "username": "gery",
+    "name": "gery bery",
+    "email": "gery@gmail.com",
+    "phone": "085212133895",
+    "password": "123456",
+    "createdAt": "2025-12-20T16:42:32.107Z"
   }
 ]

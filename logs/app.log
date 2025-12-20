@@ -1,0 +1,7 @@
+{"level":"info","message":"Customer registered","timestamp":"2025-12-20 23:42:32","userId":"60vw7xv2u","username":"gery"}
+{"durationMs":2,"ip":"::1","level":"info","message":"HTTP request","method":"POST","status":200,"timestamp":"2025-12-20 23:42:32","url":"/api/customers/register"}
+{"durationMs":1,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-20 23:42:32","url":"/api/sellers"}
+{"durationMs":2,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-20 23:42:32","url":"/api/sellers/6taop3cus/packages"}
+{"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-20 23:42:32","url":"/api/sellers/p9q6nyvar/packages"}
+{"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-20 23:42:32","url":"/api/sellers/5v93fpy2p/packages"}
+{"durationMs":0,"ip":"::1","level":"info","message":"HTTP request","method":"GET","status":304,"timestamp":"2025-12-20 23:42:32","url":"/api/sellers/7genwoswn/packages"}

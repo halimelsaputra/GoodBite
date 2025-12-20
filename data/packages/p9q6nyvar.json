@@ -1,0 +1,16 @@
+[
+  {
+    "id": "oa48pe5x2",
+    "sellerId": "p9q6nyvar",
+    "storeName": "SOBA",
+    "location": "Batoh",
+    "category": "restaurant",
+    "price": 15000,
+    "originalValue": 45000,
+    "available": 13,
+    "pickupTime": "18:00-22:00",
+    "description": "belik aja gak usah banyak tanya",
+    "image": "",
+    "createdAt": "2025-12-17T05:53:29.044Z"
+  }
+]

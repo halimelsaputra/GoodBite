@@ -7,9 +7,12 @@ import { useEffect } from "react";
 import Index from "./pages/Beranda";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import SellerLogin from "./pages/SellerLogin";
+import SellerRegister from "./pages/SellerRegister";
 import SellerHub from "./pages/SellerHub";
 import Jelajahi from "./pages/Jelajahi";
 import PaketDetail from "./pages/PaketDetail";
+import SellerProfil from "./pages/SellerProfil";
 import Checkout from "./pages/Checkout";
 import PesananDetail from "./pages/PesananDetail";
 import Profil from "./pages/Profil";
@@ -41,6 +44,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/seller-login" element={<SellerLogin />} />
+          <Route path="/seller-register" element={<SellerRegister />} />
           <Route path="/register" element={<Register />} />
           <Route path="/seller-dashboard" element={<SellerHub />} />
           <Route path="/dashboard-penjual" element={<SellerHub />} />
@@ -50,6 +55,7 @@ const App = () => (
           <Route path="/paket/:id" element={<PaketDetail />} />
           <Route path="/checkout/:id" element={<Checkout />} />
           <Route path="/pesanan" element={<Jelajahi />} />
+          <Route path="/seller-profil" element={<SellerProfil />} />
           <Route path="/pesanan/:id" element={<PesananDetail />} />
           <Route path="/riwayat-pesanan" element={<Jelajahi />} />
           <Route path="/profil" element={<Profil />} />
